@@ -192,16 +192,18 @@
 
                         <div class="class= grid md:grid-cols-3 mb-3 mt-3">
                             <div class="flex items-center border-gray-100">
-                                <span
+                                <!-- Counter Item -->
+                                <span @click="kurang"
                                     class="cursor-pointer rounded-l bg-gray-100 py-1 px-3.5 duration-100 hover:bg-yellow-400 hover:text-yellow-50">
                                     - </span>
-                                <input class="h-8 w-8 border bg-white text-center text-xs outline-none" type="number"
-                                    value="2" min="1" />
-                                <span
+                                    <span class="mr-2 ml-2">
+                                            {{ cek }}
+                                        </span>
+                                <span @click="tambah"
                                     class="cursor-pointer rounded-r bg-gray-100 py-1 px-3 duration-100 hover:bg-yellow-400 hover:text-yellow-50">
                                     + </span>
                             </div>
-                            <h2 class="font-bold text-black truncate">Stock : 1.950</h2>
+                            <h2 class="font-bold text-black truncate mt-2">Stock : 1.950</h2>
                         </div>
 
                         <p class="mb-3 font-normal text-gray-500 dark:text-gray-400">Go to this step by step guideline
@@ -210,17 +212,18 @@
 
                         <div class="class= grid md:grid-cols-2">
                             <h2 class="text-sm title-font text-gray-500 tracking-widest">Subtotal</h2>
-                            <h2 class="text-2xl font-bold text-black truncate block capitalize mb-4 ml-16 px-3">$58.00</h2>
+                            <h2 class="text-2xl font-bold text-black truncate block capitalize mb-4 px-1">Rp. {{ product.base_price*cek }}</h2>
                         </div>
 
-
-                        <div class="mb-4">
-                            <button
+                        <!-- Authtentication Token -->
+                        <div class="mb-4" v-if="token">
+                            <button @click="addKeranjang(product.id)"
                                 class="grid w-full cursor-pointer select-none rounded-md border border-yellow-400 bg-yellow-400 py-2 px-5 text-center align-middle font-bold text-white truncate text-white shadow hover:border-yellow-400 hover:bg-yellow-400 hover:text-white focus:border-yellow-400 focus:bg-yellow-400 focus:text-white focus:shadow-none"
                                 type="submit">+ Cart</button>
                         </div>
-                        <div class="mb-4">
-                            <router-link to="/cart-checkout">
+                        
+                        <div class="mb-4" v-else>
+                            <router-link to="/login">
                                 <button
                                     class="grid w-full cursor-pointer select-none rounded-md border border-yellow-400 bg-white-400 py-2 px-5 text-center align-middle font-bold text-yellow-400 truncate "
                                     type="submit">Buy Now</button>
@@ -248,6 +251,12 @@
 import { mapGetters, mapActions } from "vuex";
 
 export default {
+    data() {
+        return {
+            token: null,
+            cek: 1
+        }
+    },
     computed: {
         ...mapGetters("product", ["getProductBySlug"]),
         product() {
@@ -257,17 +266,40 @@ export default {
     methods: {
         ...mapActions("product", ["fetchSingleProduct"]),
         ...mapActions('product', ['fetchProduct']),
+
+        // Keranjang
+        ...mapActions('keranjang', ['fetchKeranjang']),
+        
+
+        // Tambah Keranjang
+        ...mapActions('product', ['addKeranjang']),
+        
+
         capitalizeFirstLetter(text) {
             return text.charAt(0).toUpperCase() + text.slice(1);
         },
+        tambah() {
+            this.cek++
+        },
+        kurang() {
+            if(this.cek > 1) {
+                this.cek--
+            }
+            
+        }
     },
     beforeMount() {
         this.fetchProduct()
+        this.fetchKeranjang()
     },
     mounted() {
         const product_slug = this.$route.params.slug;
         console.log("Fetching single product with Slug:", product_slug);
         this.fetchSingleProduct(product_slug);
+
+        // Authtentication Token
+        const cekToken = localStorage.getItem("token")
+        this.token = cekToken
     },
 
 };

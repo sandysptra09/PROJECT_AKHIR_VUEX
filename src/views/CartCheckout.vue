@@ -15,17 +15,19 @@
                             </div>
                             <div class="mt-4 flex justify-between sm:space-y-6 sm:mt-0 sm:block sm:space-x-6">
                                 <div class="flex items-center border-gray-100">
-                                    <span
+                                    <span @click="kurang"
                                         class="cursor-pointer rounded-l bg-gray-100 py-1 px-3.5 duration-100 hover:bg-blue-500 hover:text-blue-50">
                                         - </span>
-                                    <input class="h-8 w-8 border bg-white text-center text-xs outline-none" type="number"
-                                        value="2" min="1" />
-                                    <span
+                                        <span class="mr-2 ml-2">
+                                            {{ cek }}
+                                        </span>
+                                   
+                                    <span @click="tambah"
                                         class="cursor-pointer rounded-r bg-gray-100 py-1 px-3 duration-100 hover:bg-blue-500 hover:text-blue-50">
                                         + </span>
                                 </div>
                                 <div class="flex items-center space-x-4">
-                                    <p class="text-sm">259.000 ₭</p>
+                                    <p class="text-sm">Rp. {{ 1000000 * cek }}</p>
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.5" stroke="currentColor"
                                         class="h-5 w-5 cursor-pointer duration-150 hover:text-red-500">
@@ -97,3 +99,37 @@
         </div>
     </div>
 </template>
+
+<script>
+import { mapActions, mapGetters } from 'vuex'
+export default {
+    data() {
+        return {
+            cek: 1
+        }
+    },
+    // computed: {
+    //     ...mapGetters('product', ['getProduct'])
+    // },
+    // methods: {
+    //     ...mapActions('product', ['fetchProduct']),
+    //     tambah() {
+    //         this.cek++
+    //     },
+    //     kurang() {
+    //         if(this.cek > 1) {
+    //             this.cek--
+    //         }
+            
+    //     }
+    // },
+    // beforeMount() {
+    //     this.fetchProduct()
+    // },
+    // created() {
+    //     this.fetchProduct()
+    // }
+}
+
+
+</script>

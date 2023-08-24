@@ -30,7 +30,6 @@ const routes = [
         path: "/product/:slug",
         name: "DetailProduct",
         component: DetailProduct,
-        beforeEnter : cekToken,
       },
     {
         path: '/all-categories',
