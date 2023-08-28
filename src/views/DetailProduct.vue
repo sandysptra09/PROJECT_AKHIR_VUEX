@@ -55,7 +55,7 @@
             <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-6 mb-4">
                 <div class="grid md:grid-cols-3 gap-8">
                     <img alt="ecommerce" class=" w-full object-cover object-center rounded  border-gray-200"
-                        src="https://www.whitmorerarebooks.com/pictures/medium/2465.jpg">
+                        src="https://img.freepik.com/premium-photo/fresh-bright-fruits-berries-white-background-ai-generated_447653-648.jpg?w=360">
 
                     <div class="rounded-lg p-8 md:p-2 ">
                         <h2 class="text-sm title-font text-gray-500 tracking-widest mb-2">CATEGORY NAME</h2>
@@ -162,7 +162,7 @@
 
                         </div>
                         <div class="flex">
-                            <span class="title-font font-medium text-2xl text-gray-900">$58.00</span>
+                            <span class="title-font font-medium text-2xl text-gray-900">Rp. {{ product.base_price }}</span>
                            
                             <button
                                 class="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4">
@@ -217,7 +217,7 @@
 
                         <!-- Authtentication Token -->
                         <div class="mb-4" v-if="token">
-                            <button @click="addKeranjang(product.id)"
+                            <button @click="addKeranjang(product.variations[0].id)"
                                 class="grid w-full cursor-pointer select-none rounded-md border border-yellow-400 bg-yellow-400 py-2 px-5 text-center align-middle font-bold text-white truncate text-white shadow hover:border-yellow-400 hover:bg-yellow-400 hover:text-white focus:border-yellow-400 focus:bg-yellow-400 focus:text-white focus:shadow-none"
                                 type="submit">+ Cart</button>
                         </div>
@@ -294,7 +294,7 @@ export default {
     },
     mounted() {
         const product_slug = this.$route.params.slug;
-        console.log("Fetching single product with Slug:", product_slug);
+        // console.log("Fetching single product with Slug:", product_slug);
         this.fetchSingleProduct(product_slug);
 
         // Authtentication Token

@@ -5,7 +5,7 @@
             <div v-for="product in getProduct" :key="product.id"
                 class="w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
                 <a href="">
-                    <img src="https://www.whitmorerarebooks.com/pictures/medium/2465.jpg" alt="Product"
+                    <img src="https://images.fineartamerica.com/images/artworkimages/mediumlarge/2/collection-of-fruit-on-white-background-nicholas-eveleigh.jpg" alt="Product"
                         class="h-80 w-72 object-cover rounded-t-xl" />
                 </a>
                 <div class="px-4 py-3 w-72">

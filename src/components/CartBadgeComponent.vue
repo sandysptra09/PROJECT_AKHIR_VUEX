@@ -26,11 +26,14 @@ export default {
     },
     methods: {
         ...mapActions('keranjang', ['fetchKeranjang']),
-        ...mapActions('product', ['addKeranjang']),
+        // ...mapActions('product', ['addKeranjang']),
     },
     beforeMount() {
         this.fetchKeranjang()
         
+    },
+    created() {
+        this.fetchKeranjang()
     }
 } 
 
