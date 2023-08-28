@@ -5,11 +5,13 @@ const keranjang = {
     namespaced: true,
     state: {
         keranjang: [],
-        address: []
+        address: [],
+        dataKeranjang: [],
     },
     getters: {
         getKeranjang: (state) => state.keranjang,
-        getAddress: (state) => state.address
+        getAddress: (state) => state.address,
+        getDataKeranjang: (state) => state.dataKeranjang,
     },
     actions: {
 
@@ -82,6 +84,7 @@ const keranjang = {
         async checkoutCart(
             { commit, dispatch }, { shippingAddress, billingAddress, paymentType, deliveryType, cart_item_ids, }) {
             try {
+                
                 const response = await axios.post(
                     `https://ecommerce.olipiskandar.com/api/v1/checkout/order/store`,
                     {
@@ -101,6 +104,7 @@ const keranjang = {
                 );
                 console.log(response.data);
                 dispatch("fetchKeranjang");
+                commit('SET_CHECKOUT', response.data);
             } catch (error) {
                 alert("Error");
                 console.log(error);
@@ -119,6 +123,11 @@ const keranjang = {
         SET_ADDRESS(state, address) {
             state.address = address;
         },
+
+        // SET DATA CHECKOUT
+        SET_CHECKOUT(state, keranjang) {
+            state.dataKeranjang = keranjang;
+          },
     }
 }
 

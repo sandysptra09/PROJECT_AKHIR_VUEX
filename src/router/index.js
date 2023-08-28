@@ -8,6 +8,7 @@ import AllCategories from '../views/AllCategories.vue'
 import AllBrands from '../views/AllBrands.vue'
 import CartCheckout from '../views/CartCheckout.vue'
 import CompletePayment from '../views/CompletePayment.vue'
+import OrderConfirmed from '../views/OrderConfirmed.vue'
 
 import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
@@ -50,6 +51,12 @@ const routes = [
         path: '/complete-payment',
         name: 'Complete-Payment',
         component: CompletePayment
+    },
+    {
+        path: '/order-confirmed/:orderCode',
+        name: 'OrderConfirmed',
+        component: OrderConfirmed,
+        props: true,
     },
     {
         path: "/login",

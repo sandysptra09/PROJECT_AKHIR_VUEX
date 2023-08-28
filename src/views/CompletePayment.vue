@@ -69,14 +69,15 @@
                                     alt="Standard Delivery" />
                                 <div class="ml-5">
                                     <span class="mt-2 font-semibold">Standard Delivery</span>
-                                    <p class="text-slate-500 text-sm leading-6">Delivery cost : {{ formatRupiah(standard) }}</p>
+                                    <p class="text-slate-500 text-sm leading-6">Delivery cost : {{ formatRupiah(standard) }}
+                                    </p>
                                     <p class="text-slate-500 text-sm leading-6">Delivery timing : 2-4 Days</p>
                                 </div>
                             </label>
                         </div>
                         <div class="relative">
-                            <input class="peer hidden" id="radio_2" type="radio" name="radio_shipping" value="express" v-model="deliveryType"
-                                 checked />
+                            <input class="peer hidden" id="radio_2" type="radio" name="radio_shipping" value="express"
+                                v-model="deliveryType" checked />
                             <span
                                 class="peer-checked:border-yellow-400 absolute right-4 top-1/2 box-content block h-3 w-3 -translate-y-1/2 rounded-full border-8 border-gray-300 bg-white"></span>
                             <label
@@ -87,7 +88,8 @@
                                     alt="Express Delivery" />
                                 <div class="ml-5">
                                     <span class="mt-2 font-semibold">Express Delivery</span>
-                                    <p class="text-slate-500 text-sm leading-6">Delivery cost : {{ formatRupiah(express) }}</p>
+                                    <p class="text-slate-500 text-sm leading-6">Delivery cost : {{ formatRupiah(express) }}
+                                    </p>
                                     <p class="text-slate-500 text-sm leading-6">Delivery timing : 2-4 Days</p>
                                 </div>
                             </label>
@@ -98,7 +100,7 @@
                     <div class="grid md:grid-cols-2 mt-5 mb-5 gap-6">
                         <div class="relative">
                             <input class="peer hidden" id="radio_3" type="radio" name="radio_payment" v-model="paymentType"
-                                value="cash_on_delivery"  checked />
+                                value="cash_on_delivery" checked />
                             <span
                                 class="peer-checked:border-yellow-400 absolute right-4 top-1/2 box-content block h-3 w-3 -translate-y-1/2 rounded-full border-8 border-gray-300 bg-white"></span>
                             <label
@@ -202,11 +204,11 @@
                             <p class="text-sm text-gray-700">{{ formatRupiah(subTotalHarga()) }}</p>
                         </div>
                     </div>
-                    <router-link to="/complete-payment">
+                    <!-- <router-link to="/order-confirmed/:orderCode"> -->
                         <button @click="performCheckout"
-                            class="mt-6 w-full rounded-md bg-yellow-400 py-1.5 font-medium text-yellow-50 hover:bg-yellow-400">Check
-                            out</button>
-                    </router-link>
+                            class="mt-6 w-full rounded-md bg-yellow-400 py-1.5 font-medium text-yellow-50 hover:bg-yellow-400">Place
+                            Order</button>
+                    <!-- </router-link> -->
                 </div>
             </div>
         </div>
@@ -219,15 +221,15 @@ import { mapGetters, mapActions } from 'vuex';
 export default {
     data() {
         return {
-           standard: 15000,
-           express: 30000
+            standard: 15000,
+            express: 30000
 
         }
     },
     computed: {
         ...mapGetters('user', ['getUsers']),
         ...mapGetters('keranjang', ['getAddress']),
-        ...mapGetters('keranjang', ['getKeranjang']),
+        ...mapGetters('keranjang', ['getKeranjang', 'getDataKeranjang']),
     },
     methods: {
         ...mapActions('user', ['fetchUsers']),
@@ -239,7 +241,7 @@ export default {
             const cartItemIds = this.getKeranjang.map(cart => cart.cart_id);
             // Get user address
             const userAddressResponse = await this.$store.dispatch('keranjang/fetchAddress');
-            const userAddressId = userAddressResponse.data[0].id;
+            const userAddressId = userAddressResponse.data[1].id;
 
             const checkoutPayload = {
                 shippingAddress: userAddressId,
@@ -250,7 +252,10 @@ export default {
             };
 
             // Call the checkout action with the collected IDs and user address
-            await this.$store.dispatch('keranjang/checkoutCart', checkoutPayload);
+            await this.$store.dispatch('keranjang/checkoutCart', checkoutPayload)
+            .then(() => {
+                this.$router.push(`/order-confirmed/${this.getDataKeranjang.order_code}`);
+            });
         },
 
         // Format Rupiah
@@ -270,7 +275,7 @@ export default {
             return this.subtotal
         },
 
-        
+
     },
     beforeMount() {
         this.fetchAddress()
