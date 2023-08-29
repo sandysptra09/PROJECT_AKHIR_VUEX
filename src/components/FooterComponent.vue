@@ -5,12 +5,12 @@
                 <div class="grid grid-cols-1 gap-8 lg:grid-cols-3">
                     <div>
                         <div class="text-teal-600">
-                            <img src="https://i.imgur.com/sjIBNt5.png"  width="220px" alt="">
+                            <img src="https://i.imgur.com/sjIBNt5.png" width="220px" alt="">
                         </div>
 
                         <p class="mt-4 max-w-xs text-gray-500">
-                            ShopEase merupakan salah satu situs jual beli online di Indonesia yang perkembangannya
-                            terhitung cepat dan memiliki tujuan untuk memudahkan setiap masyarakat di Indonesia.
+                            ShopEase is one of the online buying and selling sites in Indonesia whose development is
+                            relatively fast and has the goal of making it easier for every person in Indonesia.
                         </p>
 
                         <ul class="mt-8 flex gap-6">
@@ -204,4 +204,5 @@
                 </p>
             </div>
         </footer>
-</div></template>
+    </div>
+</template>

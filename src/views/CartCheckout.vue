@@ -7,12 +7,18 @@
                 <div class="rounded-lg md:w-2/3">
                     <div v-for="cart in getKeranjang" :key="cart.cart_id"
                         class="justify-between mb-6 rounded-lg bg-white p-6 shadow-md sm:flex sm:justify-start">
-                        <img src="https://assets.ayobandung.com/crop/0x0:0x0/750x500/webp/photo/2023/02/23/sikap-toleransi-Fiony-JKT48-1155254116.jpg"
+                        <img src="https://img.freepik.com/premium-photo/fresh-bright-fruits-berries-white-background-ai-generated_447653-648.jpg?w=360"
                             alt="product-image" class="w-full rounded-lg sm:w-40" />
                         <div class="sm:ml-4 sm:flex sm:w-full sm:justify-between">
                             <div class="mt-5 sm:mt-0">
-                                <h2 class="text-lg font-bold text-gray-900">{{ cart.name }}</h2>
-                                <p class="mt-1 text-xs text-gray-700">{{ cart.stock }}</p>
+                                <h2 class="text-lg capitalize font-bold text-gray-900">{{ cart.name }}</h2>
+                                <p class="text-lg font-semibold text-black cursor-auto my-3">{{
+                                    formatRupiah(cart.dicounted_price) }}
+                                </p>
+                                <del>
+                                    <p class="text-sm text-gray-600 cursor-auto ml-2">{{ formatRupiah(cart.regular_price) }}
+                                    </p>
+                                </del>
                             </div>
                             <div class="mt-4 flex justify-between sm:space-y-6 sm:mt-0 sm:block sm:space-x-6">
                                 <div class="flex items-center border-gray-100">
@@ -112,7 +118,7 @@ export default {
             });
             return formatter.format(number);
         },
-        
+
         subTotalHarga() {
             this.subtotal = this.getKeranjang.reduce((acc, cart) => {
                 return acc + parseFloat(cart.regular_price * cart.qty);
@@ -120,7 +126,7 @@ export default {
             return this.subtotal
         },
 
-    
+
     },
     created() {
         this.fetchKeranjang()

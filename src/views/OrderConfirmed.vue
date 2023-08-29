@@ -9,85 +9,170 @@
         <p class="text-500 text-center  text-sm ">Order code : {{ getOrder.code }}</p>
         <p class="text-500 text-center italic text-sm ">A copy of your order summary has been sent to {{ getUsers.email }}
         </p>
-        <div class="container p-2 mx-auto sm:p-4 dark:text-gray-100">
-            <h2 class="mb-4 text-3xl font-bold leadi">Order Summary</h2>
-            <div class="overflow-x-auto">
-                <table class="min-w-full text-xs">
-                    <!-- <colgroup>
-                        <col>
-                        <col>
-                        <col>
-                        <col>
-                        <col>
-                        <col class="w-24">
-                    </colgroup> -->
-                    
-                    <tbody>
-                        <tr>
-                            <td class="p-3">
-                                <p class="text-sm font-bold">Order Code :</p>
-                            </td>
-                            <td class="p-3">
-                                <p class="text-sm">{{ getOrder.code }}</p>
-                            </td>
-                            <td class="p-3">
-                                <p class="dark:text-gray-400 text-sm font-bold">Total Order Amount</p>
-                            </td>
-                            <td class="p-3">
-                                <p class="text-sm">{{ formatRupiah(getOrder.grand_total) }}</p>
-                            </td>
-                            
-                        </tr>
-                        <tr>
-                            <td class="p-3">
-                                <p class="text-sm font-bold">Name :</p>
-                            </td>
-                            <td class="p-3">
-                                <p class="text-sm">{{ getUsers.name }}</p>
-                            </td>
-                            <td class="p-3">
-                                <p class="dark:text-gray-400 text-sm font-bold">Payment Method :</p>
-                            </td>
-                            <td class="p-3">
-                                <p class="text-sm">{{ getOrder.orders[0].payment_type }}</p>
-                            </td>
-                        </tr>
-                        <tr >
-                            <td class="p-3">
-                                <p class="text-sm font-bold">Email :</p>
-                            </td>
-                            <td class="p-3">
-                                <p class="text-sm">{{ getUsers.email }}</p>
-                            </td>
-                            <td class="p-3">
-                                <p class="dark:text-gray-400 text-sm font-bold">Delivery type :</p>
-                            </td>
-                            <td class="p-3">
-                                <p class="text-sm">{{ getOrder.orders[0].delivery_type }}</p>
-                            </td>
-                            
-                        </tr>
-                        <tr >
-                            <td class="p-3">
-                                <p class="text-sm font-bold">Shipping Address :</p>
-                            </td>
-                            <td class="p-3">
-                                <p class="text-sm">{{ getOrder.shipping_address.address }}, {{ getOrder.shipping_address.postal_code }}, {{ getOrder.shipping_address.city }}, {{ getOrder.shipping_address.state }}, 
-                                    {{ getOrder.shipping_address.country }}, {{ getOrder.shipping_address.phone }}</p>
-                            </td>
-                            <td class="p-3">
-                                <p class="dark:text-gray-400 text-sm font-bold">Billing Address :</p>
-                            </td>
-                            <td class="p-3">
-                                <p class="text-sm">{{ getOrder.shipping_address.address }}, {{ getOrder.shipping_address.postal_code }}, {{ getOrder.shipping_address.city }}, {{ getOrder.shipping_address.state }}, 
-                                    {{ getOrder.shipping_address.country }}, {{ getOrder.shipping_address.phone }}</p>
-                            </td>
-                            
-                        </tr>
-                    </tbody>
-                </table>
+        <div class="mx-auto max-w-9xl justify-center px-6 md:flex md:space-x-6 xl:px-0">
+            <div class="rounded-lg md:w-4/5">
+                <h1 class="mb-2 mt-10 ml-5 text-left text-2xl font-bold">Order Summary</h1>
+                <div class="grid md:grid-cols-2 mt-5 mb-5 gap-5">
+
+                    <div class="relative overflow-x-auto">
+                        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+
+                            <tbody>
+                                <tr class="bg-white">
+                                    <th scope="row"
+                                        class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        Order Code :
+                                    </th>
+                                    <td class="px-6 py-4">
+                                        {{ getOrder.code }}
+                                    </td>
+
+                                </tr>
+                                <tr class="bg-white">
+                                    <th scope="row"
+                                        class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        Name :
+                                    </th>
+                                    <td class="px-6 py-4">
+                                        {{ getUsers.name }}
+                                    </td>
+
+                                </tr>
+                                <tr class="bg-white dark:bg-gray-800">
+                                    <th scope="row"
+                                        class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        Email :
+                                    </th>
+                                    <td class="px-6 py-4">
+                                        {{ getUsers.email }}
+                                    </td>
+
+                                </tr>
+                                <tr class="bg-white dark:bg-gray-800">
+                                    <th scope="row"
+                                        class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        Shipping Address :
+                                    </th>
+                                    <td class="px-6 py-4">
+                                        {{ getOrder.shipping_address.address }}, {{ getOrder.shipping_address.postal_code
+                                        }}, {{ getOrder.shipping_address.city }}, {{ getOrder.shipping_address.state }},
+                                        {{ getOrder.shipping_address.country }}, {{ getOrder.shipping_address.phone }}
+                                    </td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="relative overflow-x-auto">
+                        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+
+                            <tbody>
+                                <tr class="bg-white">
+                                    <th scope="row"
+                                        class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        Total Order Amount :
+                                    </th>
+                                    <td class="px-6 py-4">
+                                        {{ formatRupiah(getOrder.grand_total) }}
+                                    </td>
+
+                                </tr>
+                                <tr class="bg-white">
+                                    <th scope="row"
+                                        class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        Payment Method :
+                                    </th>
+                                    <td class="px-6 py-4">
+                                        {{ getOrder.orders[0].payment_type }}
+                                    </td>
+
+                                </tr>
+                                <tr class="bg-white dark:bg-gray-800">
+                                    <th scope="row"
+                                        class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        Delivery type :
+                                    </th>
+                                    <td class="px-6 py-4 capitalize">
+                                        {{ getOrder.orders[0].delivery_type }}
+                                    </td>
+
+                                </tr>
+                                <tr class="bg-white dark:bg-gray-800">
+                                    <th scope="row"
+                                        class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        Billing Address :
+                                    </th>
+                                    <td class="px-6 py-4">
+                                        {{ getOrder.shipping_address.address }}, {{ getOrder.shipping_address.postal_code
+                                        }}, {{ getOrder.shipping_address.city }}, {{ getOrder.shipping_address.state }},
+                                        {{ getOrder.shipping_address.country }}, {{ getOrder.shipping_address.phone }}
+                                    </td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
+
+        <div class="mx-auto max-w-4xl justify-center px-6 md:flex md:space-x-4 xl:px-0">
+            <div class="rounded-lg md:w-3/5">
+                <div v-for="(order) in getOrder.orders[0].products.data"
+                            class="flex flex-col rounded-lg bg-white sm:flex-row">
+                            <img class="m-2 h-24 w-28 rounded-md border object-cover object-center"
+                                src="https://img.freepik.com/premium-photo/fresh-bright-fruits-berries-white-background-ai-generated_447653-648.jpg?w=360"
+                                alt="" />
+                            <div class="flex w-full flex-col px-4 py-4">
+                                <span class="font-semibold">{{ order.name }}</span>
+                                <span class=" mt-1 mb-2 float-right text-gray-700"> {{ order.quantity }} pcs</span>
+                                <p class="font-bold">{{ formatRupiah(order.total) }}</p>
+                            </div>
+                </div>
+            </div>
+
+            <div class="rounded-lg md:w-4/5">
+                <div class="mt-6 h-full rounded-lg border bg-white p-6 shadow-md md:mt-0 md:w-5/5">
+                    <div class="mb-4 flex justify-between">
+                        <p class="text-gray-700 font-bold">Sub Total</p>
+                        <p class="text-sm text-gray-700 font-bold">{{ formatRupiah(getOrder.grand_total) }}</p>
+                    </div>
+
+                    <div class="mb-4 flex justify-between">
+                        <p class="text-gray-700 font-bold">Tax</p>
+                        <p class="text-sm text-gray-700 font-bold">Rp. 0</p>
+                    </div>
+
+                    <div class="mb-4 flex justify-between">
+                        <p class="text-gray-700 font-bold">Shipping Charge</p>
+                        <p class="text-sm text-gray-700 font-bold">Rp. 0</p>
+                    </div>
+                    
+                    <div class="mb-4 flex justify-between">
+                        <p class="text-gray-700 font-bold">Coupon discount</p>
+                        <p class="text-sm text-gray-700 font-bold">Rp. 0</p>
+                    </div>
+                    
+                    <hr class="my-4" />
+                    <div class="flex justify-between">
+                        <p class="text-lg font-bold">Total</p>
+                        <div class="">
+                            <p class="mb-1 text-lg font-bold"></p>
+                            <p class="text-gray-700 font-bold">{{ formatRupiah(getOrder.grand_total) }}</p>
+                        </div>
+                    </div>
+                  
+                </div>
+            </div>
+
+        </div>
+
+       <center>
+        <router-link to="/" class="inline-flex items-center justify-center mt-12 h-12 px-6 mr-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-yellow-300 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none">
+            BACK TO HOME
+        </router-link>
+       </center>
+
     </div>
 </template>
 
@@ -96,13 +181,13 @@
 import { mapGetters, mapActions } from 'vuex';
 
 export default {
-    data() {
-        return {
-            standard: 15000,
-            express: 30000
+    // data() {
+    //     return {
+    //         standard: 15000,
+    //         express: 30000
 
-        }
-    },
+    //     }
+    // },
     props: ['orderCode'],
     computed: {
 

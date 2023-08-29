@@ -21,7 +21,7 @@
                         <p class="text-gray-400">In Wishlist</p>
                     </div>
                     <div>
-                        <p class="font-bold text-gray-700 text-xl">89</p>
+                        <p class="font-bold text-gray-700 text-xl">{{ getDasboard.total_order_products }}</p>
                         <p class="text-gray-400">Ordered</p>
                     </div>
                 </div>
@@ -31,45 +31,104 @@
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-24 w-24" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
                                 clip-rule="evenodd" />
-                        </svg> </div>
+                        </svg>
+                    </div>
+                </div>
+                <div class="space-x-8 flex justify-between mt-32 md:mt-0 md:justify-center">
+                    <div>
+                        <p class="font-bold text-gray-700 text-xl">Rp. 0</p>
+                        <p class="text-gray-400">My Wallet</p>
+                    </div>
+                    
+                </div>
             </div>
-            <div class="space-x-8 flex justify-between mt-32 md:mt-0 md:justify-center"><button
-                    class="text-white py-2 px-4 uppercase rounded bg-blue-400 hover:bg-blue-500 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5">
-                    Connect</button> <button
-                    class="text-white py-2 px-4 uppercase rounded bg-gray-700 hover:bg-gray-800 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5">
-                    Message</button> </div>
+            <div class="mt-20 text-center border-b pb-12">
+                <h1 class="text-4xl font-medium text-gray-700">{{ getUsers.name }} </h1>
+
+                <p class="font-light text-gray-600 mt-3">{{ getUsers.email }}</p>
+
+            </div>
+
+            <div class="mx-auto max-w-5xl justify-center mt-6 px-6 md:flex md:space-x-6 xl:px-0">
+                <div class="rounded-lg md:w-2/3">
+                    <p class="text-gray-700 font-semibold">Default Address</p>
+                    <div class="relative mt-4">
+                        <input type="radio" name="" class="peer hidden" checked>
+                        <label
+                            class="peer-checked:border-2 peer-checked:border-yellow-400 peer-checked:bg-gray-50 flex cursor-pointer select-none rounded-lg border border-gray-300 p-4"
+                            for="">
+
+                            <div class="ml-4">
+                                <span class="mt-2 font-semibold">{{ getUsers.name }}</span>
+                                <p class="text-slate-500 text-sm leading-6">{{ getAddress.phone }}</p>
+                                <p class="text-slate-500 text-sm leading-6">{{ getAddress.address }}, {{ getAddress.city }},
+                                    {{
+                                        getAddress.country }}.</p>
+                            </div>
+                        </label>
+
+                    </div>
+                </div>
+                <div class="mt-6 h-full rounded-lg border bg-white p-6 shadow-md md:mt-0 md:w-1/3">
+                    <p class="text-gray-700 font-semibold">User info</p>
+                    <div class="flex justify-between mt-2">
+                        <p class="text-sm font-semibold">Name</p>
+                        <div class="">
+
+                            <p class="text-sm text-gray-700">{{ getUsers.name }}</p>
+                        </div>
+                    </div>
+                    <div class="flex justify-between mt-2">
+                        <p class="text-sm font-semibold">Email</p>
+                        <div class="">
+
+                            <p class="text-sm text-gray-700">{{ getUsers.email }}</p>
+                        </div>
+                    </div>
+                    <div class="flex justify-between mt-2">
+                        <p class="text-sm font-semibold">Phone</p>
+                        <div class="">
+
+                            <p class="text-sm text-gray-700">{{ getAddress.phone }}</p>
+                        </div>
+                    </div>
+                    <div class="flex justify-between mt-2">
+                        <p class="text-sm font-semibold">City</p>
+                        <div class="">
+
+                            <p class="text-sm text-gray-700">{{ getAddress.city }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
         </div>
-        <div class="mt-20 text-center border-b pb-12">
-            <h1 class="text-4xl font-medium text-gray-700">{{ getUsers.name }} </h1>
-                <!-- <span class="font-light text-gray-500">27</span> -->
-            <p class="font-light text-gray-600 mt-3">{{getUsers.email}}</p>
-            <!-- <p class="mt-8 text-gray-500">Solution Manager - Creative Tim Officer</p>
-            <p class="mt-2 text-gray-500">University of Computer Science</p> -->
-        </div>
-        <!-- <div class="mt-12 flex flex-col justify-center">
-            <p class="text-gray-600 text-center font-light lg:px-16">An artist of considerable range, Ryan — the name
-                taken by Melbourne-raised, Brooklyn-based Nick Murphy — writes, performs and records all of his own
-                music, giving it a warm, intimate feel with a solid groove structure. An artist of considerable range.
-            </p> <button class="text-indigo-500 py-2 px-4  font-medium mt-4"> Show more</button>
-        </div> -->
     </div>
-</div></template>
+</template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
 
 export default {
     computed: {
-        ...mapGetters('user', ['getUsers']),
-        ...mapGetters('keranjang', ['getKeranjang'])
+        ...mapGetters('user', ['getUsers', 'getDasboard']),
+        ...mapGetters('keranjang', ['getKeranjang']),
+        ...mapGetters('keranjang', ['getAddress']),
     },
     methods: {
-        ...mapActions('user', ['fetchUsers']),
+        ...mapActions('user', ['fetchUsers', 'fetchDasboard']),
         ...mapActions('keranjang', ['fetchKeranjang']),
+        ...mapActions('keranjang', ['fetchAddress']),
+    },
+    beforeMount() {
+        this.fetchAddress()
     },
     created() {
         this.fetchUsers(),
-        this.fetchKeranjang()
+            this.fetchKeranjang()
+        this.fetchDasboard()
+        this.fetchAddress()
     }
 }
 

@@ -8,10 +8,10 @@
                 <div class="p-4 w-full">
                     <a class="block relative h-48 rounded overflow-hidden">
                         <img alt="ecommerce" class="object-cover object-center w-full h-full block"
-                            :src="brands.logo">
+                            src="https://upload.wikimedia.org/wikipedia/en/thumb/0/0d/Fruit_logo.svg/640px-Fruit_logo.svg.png">
                     </a>
                     <div class="mt-4">
-                        <h3 class="text-black-500 text-xs tracking-widest title-font mb-1">{{ brands.name }}</h3>
+                        <h3 class="text-black-500 text-lg tracking-widest title-font mb-1">{{ brands.name }}</h3>
 
                     </div>
                 </div>
