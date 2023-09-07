@@ -108,6 +108,8 @@ export default {
 
         // Edit Keranjang  
         ...mapActions('product', ['editKeranjang']),
+
+        // Hapus Keranjang
         ...mapActions('keranjang', ['deleteKeranjang']),
 
         // Format Rupiah

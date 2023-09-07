@@ -5,7 +5,9 @@ import Profile from '../views/Profile.vue'
 import Products from '../views/Products.vue'
 import DetailProduct from '../views/DetailProduct.vue'
 import AllCategories from '../views/AllCategories.vue'
+import FilterPageCategory from '../views/FilterPageCategory.vue'
 import AllBrands from '../views/AllBrands.vue'
+import FiltePageBrand from '../views/FilterPageBrand.vue'
 import CartCheckout from '../views/CartCheckout.vue'
 import CompletePayment from '../views/CompletePayment.vue'
 import OrderConfirmed from '../views/OrderConfirmed.vue'
@@ -33,14 +35,25 @@ const routes = [
         component: DetailProduct,
       },
     {
-        path: '/all-categories',
+        path: '/category',
         name: 'All-Categories',
         component: AllCategories
     },
     {
-        path: '/all-brands',
+        path: "/category/:slug",
+        name: "FilterCategory",
+        component: FilterPageCategory,
+        props: true,
+    },
+    {
+        path: '/brands',
         name: 'All-Brands',
         component: AllBrands
+    },
+    {
+        path: '/brands/:id',
+        name: 'FilterBrand',
+        component: FiltePageBrand
     },
     {
         path: '/cart-checkout',

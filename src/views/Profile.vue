@@ -115,20 +115,23 @@ export default {
         ...mapGetters('user', ['getUsers', 'getDasboard']),
         ...mapGetters('keranjang', ['getKeranjang']),
         ...mapGetters('keranjang', ['getAddress']),
+        ...mapGetters('wishlist', ['getWishlist'])
     },
     methods: {
         ...mapActions('user', ['fetchUsers', 'fetchDasboard']),
         ...mapActions('keranjang', ['fetchKeranjang']),
         ...mapActions('keranjang', ['fetchAddress']),
+        ...mapActions('wishlist', ['fetchWishlist'])
     },
     beforeMount() {
         this.fetchAddress()
     },
     created() {
         this.fetchUsers(),
-            this.fetchKeranjang()
+        this.fetchKeranjang()
         this.fetchDasboard()
         this.fetchAddress()
+        this.fetchWishlist()
     }
 }
 

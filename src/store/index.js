@@ -3,9 +3,10 @@ import user from "./modules/users";
 import auth from "./modules/auth";
 import product from "./modules/product";
 import category from "./modules/category";
-import brands from "./modules/brands";
+import brand from "./modules/brands";
 import keranjang from './modules/keranjang'
 import order from "./modules/order";
+import wishlist from "./modules/wishlist";
 
 const store = createStore({
     state: {
@@ -15,10 +16,11 @@ const store = createStore({
         auth,
         product,
         category,
-        brands,
+        brand,
         user,
         keranjang,
         order,
+        wishlist
     },
 });
   

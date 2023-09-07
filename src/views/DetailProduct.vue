@@ -33,7 +33,7 @@
                             <span class="mx-4 h-auto text-gray-400 font-medium">/</span>
                         </li>
 
-                        
+
 
                         <li>
                             <a href="#" class="text-neutral-500 dark:text-neutral-200">{{
@@ -92,7 +92,7 @@
                         </svg>
                         <span class="text-gray-600 ml-3">729 Reviews</span>
                     </span>
-                    
+
                 </div>
                 <p class="leading-relaxed">"This is natural delicacy like no other! The fresh fruit we offer is the perfect
                     choice for lovers of natural taste and nutritional enjoyment. Every bite of this selected fruit takes
@@ -109,7 +109,7 @@
                     <span class="title-font font-medium text-2xl text-gray-900">{{ formatRupiah(product.base_price)
                     }}</span>
 
-                    <button
+                    <button @click="addwishlist(product.variations[0].product_id)"
                         class="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4">
                         <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             class="w-5 h-5" viewBox="0 0 24 24">
@@ -117,6 +117,9 @@
                                 d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z">
                             </path>
                         </svg>
+                    </button>
+                    <button class="ml-4" @click="deleteWishlist(product.id)">
+                        Hapus Wishlist
                     </button>
                 </div>
 
@@ -155,7 +158,7 @@
                         </div>
 
                     </div> -->
-                    
+
                     <!-- <h2 class="font-bold text-black truncate mt-2">Stock : 1.950</h2> -->
                     <div class="mt-4">
                         <h2 class="text-sm title-font text-gray-500 tracking-widest">Subtotal</h2>
@@ -278,6 +281,7 @@
 <script>
 import RatingReviewComponent from "../components/RatingReviewComponent.vue";
 import { mapGetters, mapActions } from "vuex";
+import Swal from 'sweetalert2';
 
 export default {
     components: {
@@ -294,6 +298,9 @@ export default {
         product() {
             return this.getProductBySlug(this.$route.params.slug);
         },
+        wishlist() {
+            return this.$store.getters['wishlist/getWishlist'];
+        },
     },
     methods: {
         ...mapActions("product", ["fetchSingleProduct"]),
@@ -305,6 +312,19 @@ export default {
 
         // Tambah Keranjang
         ...mapActions('product', ['addKeranjang']),
+
+        // Tambah Wishlist
+        async addwishlist(productId) {
+            await this.$store.dispatch('wishlist/addwishlist', productId);
+            Swal.fire({
+                title: 'Product successfully added to wishlist !',
+                icon: 'success',
+                confirmButtonText: 'OK',
+            });
+        },
+
+        // Hapus Wishlist
+        ...mapActions('wishlist', ['deleteWishlist']),
 
 
         capitalizeFirstLetter(text) {

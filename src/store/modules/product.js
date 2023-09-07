@@ -4,7 +4,9 @@ const product = {
   namespaced: true,
   state: {
     products: [],
+    singleProduct: [],
     keranjang: [],
+
 
   },
   getters: {
@@ -15,7 +17,10 @@ const product = {
       const product = state.products.find((p) => p.slug == product_slug);
       return product;
     },
+
+
   },
+
   actions: {
     async fetchProduct({ commit }) {
       try {
@@ -26,6 +31,7 @@ const product = {
         console.log(error)
       }
     },
+
     async fetchSingleProduct({ commit }, product_slug) {
       try {
         const response = await axios.get(
@@ -72,7 +78,7 @@ const product = {
             'Authorization': `Bearer ${localStorage.getItem("token")}`
           }
         });
-        
+
         console.log(response.data)
 
       } catch (error) {
@@ -85,9 +91,6 @@ const product = {
       }
 
     },
-
-
-
 
   },
   mutations: {

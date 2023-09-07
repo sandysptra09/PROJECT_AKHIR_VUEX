@@ -36,27 +36,47 @@ const keranjang = {
         // delete cart
         async deleteKeranjang({ commit, dispatch }, kategoriId) {
             try {
-                const hapuskeranjang = await axios.post("https://ecommerce.olipiskandar.com/api/v1/carts/destroy", {
-                    "cart_id": kategoriId,
-                    "temp_user_id": null
-                }, {
-                    headers: {
-                        'Authorization': `Bearer ${localStorage.getItem('token')}`
-                    }
-                })
-                console.log(hapuskeranjang.data);
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Remove Successful',
-                    text: 'Item has been removed from your cart !',
+                // Tampilkan SweetAlert2 untuk konfirmasi penghapusan
+                const confirmResult = await Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
                 });
-                // commit('SET_KERANJANG',hapuskeranjang.data.cart_items.data)
-            } catch (error) {
-                // alert('Ada Error')
-                console.log(error)
 
-            }
-            finally {
+                // Jika pengguna mengklik "Yes", maka hapus produk dari keranjang
+                if (confirmResult.isConfirmed) {
+                    // Hapus produk dari keranjang
+                    const hapuskeranjang = await axios.post("https://ecommerce.olipiskandar.com/api/v1/carts/destroy", {
+                        "cart_id": kategoriId,
+                        "temp_user_id": null
+                    }, {
+                        headers: {
+                            'Authorization': `Bearer ${localStorage.getItem('token')}`
+                        }
+                    });
+                    console.log(hapuskeranjang.data);
+
+                    commit('SET_KERANJANG', hapuskeranjang.data.cart_items.data);
+                    Swal.fire(
+                        'Deleted!',
+                        'Your product has been deleted.',
+                        'success'
+                    );
+                } else {
+                    // Jika pengguna mengklik "Cancel", produk tidak dihapus dari keranjang
+                    Swal.fire(
+                        'Cancelled',
+                        'Your product is safe :)',
+                        'error'
+                    );
+                }
+            } catch (error) {
+                console.log(error);
+            } finally {
                 dispatch("keranjang/fetchKeranjang", null, { root: true });
             }
         },
@@ -84,7 +104,7 @@ const keranjang = {
         async checkoutCart(
             { commit, dispatch }, { shippingAddress, billingAddress, paymentType, deliveryType, cart_item_ids, }) {
             try {
-                
+
                 const response = await axios.post(
                     `https://ecommerce.olipiskandar.com/api/v1/checkout/order/store`,
                     {
@@ -127,7 +147,7 @@ const keranjang = {
         // SET DATA CHECKOUT
         SET_CHECKOUT(state, keranjang) {
             state.dataKeranjang = keranjang;
-          },
+        },
     }
 }
 
