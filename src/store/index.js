@@ -7,6 +7,7 @@ import brand from "./modules/brands";
 import keranjang from './modules/keranjang'
 import order from "./modules/order";
 import wishlist from "./modules/wishlist";
+import search from "./modules/search";
 
 const store = createStore({
     state: {
@@ -20,7 +21,8 @@ const store = createStore({
         user,
         keranjang,
         order,
-        wishlist
+        wishlist,
+        search
     },
 });
   

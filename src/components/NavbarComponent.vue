@@ -1,13 +1,13 @@
 <template>
     <nav class="bg-white border-gray-200 dark:bg-gray-900">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-
+            
             <router-link to="/" class="flex items-center">
                 <img src="https://i.imgur.com/fL7Po03.png" class="h-9 mr-3" alt="Flowbite Logo" />
                 <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">ShopEase.</span>
             </router-link>
 
-
+            
             <div v-if="isAuthenticated" class="flex md:order-2">
 
                 <CartBadgeComponent/>
@@ -57,34 +57,41 @@
                 </button>
             </div>
 
-
+            
+            
             <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-cta">
                 <ul
                     class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
                     <li>
                         <router-link to="/">
                             <a href="#"
-                                class="block py-2 pl-3 pr-4 text-white bg-red-700 rounded md:bg-transparent md:text-red-700 md:p-0 md:dark:text-red-500"
+                                class="block py-2 pl-3 pr-4 mt-2 text-white bg-red-700 rounded md:bg-transparent md:text-red-700 md:p-0 md:dark:text-red-500"
                                 aria-current="page">Home</a>
                         </router-link>
                     </li>
                     <li>
                         <router-link to="/category">
                             <a href="#"
-                                class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-red-700 md:p-0 md:dark:hover:text-red-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">All
+                                class="block py-2 pl-3 pr-4 mt-2 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-red-700 md:p-0 md:dark:hover:text-red-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">All
                                 Categories</a>
                         </router-link>
                     </li>
                     <li>
                         <router-link to="/brands">
                             <a href="#"
-                                class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-red-700 md:p-0 md:dark:hover:text-red-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">All
+                                class="block py-2 pl-3 pr-4 mt-2 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-red-700 md:p-0 md:dark:hover:text-red-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">All
                                 Brands</a>
                         </router-link>
                     </li>
-                    
+                    <SearchNavbarComponent/>
                 </ul>
+
+               
+
             </div>
+
+            
+            
         </div>
     </nav>
 </template>
@@ -92,6 +99,7 @@
 <script>
 import { mapActions, mapGetters } from 'vuex';
 import CartBadgeComponent from './CartBadgeComponent.vue';
+import SearchNavbarComponent from './SearchNavbarComponent.vue';
 
 export default {
     computed: {
@@ -100,7 +108,10 @@ export default {
     methods: {
         ...mapActions('auth', ['logout']),
     },
-    components: { CartBadgeComponent }
+    components: { 
+        CartBadgeComponent, 
+        SearchNavbarComponent
+    }
 };
 
 </script>

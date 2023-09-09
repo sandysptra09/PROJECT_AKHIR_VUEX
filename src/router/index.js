@@ -82,7 +82,12 @@ const routes = [
         name: 'Register',
         component: Register
     },
-  
+    {
+        path: '/home',
+        name: 'Search',
+        component: Home
+    },
+    
 ]
 
 function cekToken(to, from, next) {
