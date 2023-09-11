@@ -1,9 +1,10 @@
 <template>
+    
     <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16">
         <h1 class="text-gray-900 text-3xl title-font font-medium mb-8 ml-3">All Categories</h1>
         <div class="grid md:grid-cols-4 gap-8">
 
-            <div v-for="categories in getCategories" class="flex flex-wrap -m-2">
+            <div v-for="categories in getCategories" class="flex flex-wrap -m-2 ml-6">
 
                 <router-link :to="{ name: 'FilterCategory', params: { slug: categories.slug } }">
                     <div class="p-4 w-full">
@@ -17,6 +18,7 @@
                         </div>
                     </div>
                 </router-link>
+                
             </div>
         </div>
     </div>

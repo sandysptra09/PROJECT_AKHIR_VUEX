@@ -5,21 +5,21 @@
 
             <div class="mx-auto max-w-8xl justify-center px-6 md:flex md:space-x-6 xl:px-0">
 
-                <div class="rounded-lg md:w-2/3">
+                <div class="rounded-lg md:w-2/3" >
                     <h1 class="mb-4  text-left text-lg font-bold">Shipping address </h1>
                     <hr class="my-4" />
-                    <div class="relative">
-                        <input type="radio" name="radio_address" class="peer hidden" checked>
+                    <div>
+                        <input type="radio" name="radio_address" id="radio_address" class="peer hidden" checked>
                         <span
-                            class="peer-checked:border-yellow-400 ml-4 absolute left top-1/2 box-content block h-1 w-1 -translate-y-1/2 rounded-full border-8 border-gray-300 bg-white"></span>
-                        <label
+                            class="peer-checked:border-yellow-400 ml-4 absolute left mt-14 box-content block h-1 w-1 -translate-y-1/2 rounded-full border-8 border-gray-300 bg-white"></span>
+                            <label
                             class="peer-checked:border-2 peer-checked:border-yellow-400 peer-checked:bg-gray-50 flex cursor-pointer select-none rounded-lg border border-gray-300 p-4"
                             for="radio_address">
 
                             <div class="ml-8">
                                 <span class="mt-2 font-semibold">{{ getUsers.name }}</span>
-                                <p class="text-slate-500 text-sm leading-6">{{ getAddress.phone }}</p>
-                                <p class="text-slate-500 text-sm leading-6">{{ getAddress.address }}, {{ getAddress.city }},
+                                <p class="text-slate-500 text-sm leading-6">{{ getAddress[0].phone }}</p>
+                                <p class="text-slate-500 text-sm leading-6">{{ getAddress[0].address }}, {{ getAddress[0].city }},
                                     {{
                                         getAddress.country }}.</p>
                             </div>
@@ -186,7 +186,7 @@ export default {
             const cartItemIds = this.getKeranjang.map(cart => cart.cart_id);
             // Get user address
             const userAddressResponse = await this.$store.dispatch('keranjang/fetchAddress');
-            const userAddressId = userAddressResponse.data[1].id;
+            const userAddressId = userAddressResponse.data[0].id;
 
             const checkoutPayload = {
                 shippingAddress: userAddressId,

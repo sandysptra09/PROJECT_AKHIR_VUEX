@@ -92,7 +92,7 @@ const keranjang = {
                     }
                 });
                 console.log(getAddress.data.data)
-                commit("SET_ADDRESS", getAddress.data.data[1]);
+                commit("SET_ADDRESS", getAddress.data.data);
                 return getAddress.data
             } catch (error) {
                 alert('Ada Error')

@@ -39,7 +39,7 @@
                         <p class="font-bold text-gray-700 text-xl">Rp. 0</p>
                         <p class="text-gray-400">My Wallet</p>
                     </div>
-                    
+
                 </div>
             </div>
             <div class="mt-20 text-center border-b pb-12">
@@ -58,17 +58,44 @@
                             class="peer-checked:border-2 peer-checked:border-yellow-400 peer-checked:bg-gray-50 flex cursor-pointer select-none rounded-lg border border-gray-300 p-4"
                             for="">
 
-                            <div class="ml-4">
+                            <div class="ml-2">
                                 <span class="mt-2 font-semibold">{{ getUsers.name }}</span>
-                                <p class="text-slate-500 text-sm leading-6">{{ getAddress.phone }}</p>
-                                <p class="text-slate-500 text-sm leading-6">{{ getAddress.address }}, {{ getAddress.city }},
+                                <p class="text-slate-500 text-sm leading-6">{{ getAddress[0].phone }}</p>
+                                <p class="text-slate-500 text-sm leading-6">{{ getAddress[0].address }}, {{ getAddress[0].city }},
                                     {{
                                         getAddress.country }}.</p>
                             </div>
                         </label>
 
                     </div>
+
+                    <div class="relative mt-4" v-for="address in getAddress" :key="address.id">
+                        <input type="radio" name="radio_address" id="radio_address" class="peer hidden">
+
+                        <label class=" flex cursor-pointer select-none rounded-lg border border-gray-300 p-4"
+                            for="radio_address">
+
+                            <div class="ml-2">
+                                <span class="mt-2 font-semibold">{{ getUsers.name }} </span>
+                                <p class="text-slate-500 text-sm leading-6">{{ address.phone }}</p>
+                                <p class="text-slate-500 text-sm leading-6">{{ address.address }}, {{ address.city }},
+                                    {{
+                                        address.country }}.</p>
+                            </div>
+                            <div @click="deleteAddress(address.id)">
+                                <button class="text-slate-500 text-sm leading-6 ml-72">Delete</button>
+                            </div>
+
+                        </label>
+
+                    </div>
+
+                    <div class="mt-2">
+                        <ModalAddressComponent></ModalAddressComponent>
+                    </div>
+
                 </div>
+
                 <div class="mt-6 h-full rounded-lg border bg-white p-6 shadow-md md:mt-0 md:w-1/3">
                     <p class="text-gray-700 font-semibold">User info</p>
                     <div class="flex justify-between mt-2">
@@ -89,14 +116,14 @@
                         <p class="text-sm font-semibold">Phone</p>
                         <div class="">
 
-                            <p class="text-sm text-gray-700">{{ getAddress.phone }}</p>
+                            <p class="text-sm text-gray-700">{{ getAddress[0].phone }}</p>
                         </div>
                     </div>
                     <div class="flex justify-between mt-2">
                         <p class="text-sm font-semibold">City</p>
                         <div class="">
 
-                            <p class="text-sm text-gray-700">{{ getAddress.city }}</p>
+                            <p class="text-sm text-gray-700">{{ getAddress[0].city }}</p>
                         </div>
                     </div>
                 </div>
@@ -109,8 +136,12 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
+import ModalAddressComponent from '../components/ModalAddressComponent.vue';
 
 export default {
+    components: {
+        ModalAddressComponent
+    },
     computed: {
         ...mapGetters('user', ['getUsers', 'getDasboard']),
         ...mapGetters('keranjang', ['getKeranjang']),
@@ -121,14 +152,15 @@ export default {
         ...mapActions('user', ['fetchUsers', 'fetchDasboard']),
         ...mapActions('keranjang', ['fetchKeranjang']),
         ...mapActions('keranjang', ['fetchAddress']),
-        ...mapActions('wishlist', ['fetchWishlist'])
+        ...mapActions('wishlist', ['fetchWishlist']),
+        ...mapActions('address', ['deleteAddress'])
     },
     beforeMount() {
         this.fetchAddress()
     },
     created() {
         this.fetchUsers(),
-        this.fetchKeranjang()
+            this.fetchKeranjang()
         this.fetchDasboard()
         this.fetchAddress()
         this.fetchWishlist()

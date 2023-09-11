@@ -4,6 +4,7 @@ const product = {
   namespaced: true,
   state: {
     products: [],
+    shortProducts: [],
     singleProduct: [],
     keranjang: [],
 
@@ -11,6 +12,7 @@ const product = {
   },
   getters: {
     getProduct: (state) => state.products,
+    getShortProduct: (state) => state.shortProducts,
     getProductBySlug: (state) => (product_slug) => {
       console.log("Fetching single product by Slug:", product_slug);
       console.log("products:", state.products);
@@ -26,6 +28,16 @@ const product = {
       try {
         const dataProduct = await axios.get("https://ecommerce.olipiskandar.com/api/v1/product/latest/20")
         commit('SET_PRODUCTS', dataProduct.data['data'])
+      } catch (error) {
+        alert('Ada Error')
+        console.log(error)
+      }
+    },
+
+    async fetchShortProduct({ commit }) {
+      try {
+        const shortData = await axios.get("https://ecommerce.olipiskandar.com/api/v1/product/latest/6")
+        commit('SET_SHORT_PRODUCTS', shortData.data['data'])
       } catch (error) {
         alert('Ada Error')
         console.log(error)
@@ -96,6 +108,9 @@ const product = {
   mutations: {
     SET_PRODUCTS(state, products) {
       state.products = products
+    },
+    SET_SHORT_PRODUCTS(state, shortProducts) {
+      state.shortProducts = shortProducts
     },
     SET_SINGLE_PRODUCT(state, product) {
       state.singleProduct = product;

@@ -31,19 +31,78 @@
         </div>
     </div>
 
+    <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-4">
+        <p class="text-gray-900 text-2xl title-font font-medium mb-8 ml-3">
+            Popular Categories
+        </p>
 
-    <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16" id="scroll_product">
-        <p class="text-gray-900 text-3xl title-font font-medium mb-8 ml-3">Product</p>
-        
+        <swiper :slidesPerView="5" :spaceBetween="30" :modules="modules" :autoplay="{ delay: 4000 }" class="mySwiper">
+            <swiper-slide v-for="categories in getCategories" :key="categories.id">
+                <router-link :to="{ name: 'FilterCategory', params: { slug: categories.slug } }">
+                    <div class="p-4 w-full">
+                        <a class="block relative h-48 rounded overflow-hidden">
+                            <img alt="ecommerce" class="img-fluid"
+                                src="https://img.freepik.com/premium-vector/fruit-color-gradient-logo-design_93835-1653.jpg" />
+                        </a>
+                        <div class="mt-4">
+                            <h3 class="text-lg font-bold text-black truncate block capitalize mb-1">{{ categories.name }}
+                            </h3>
+                        </div>
+                    </div>
+                </router-link>
+            </swiper-slide>
+        </swiper>
+    </div>
+
+    <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16">
+        <p class="text-gray-900 text-2xl title-font font-medium mb-8 ml-3">Flash Sale</p>
+        <div class="grid md:grid-cols-3 gap-8">
+            <div v-for="product in getShortProduct" :key="product.id"
+                class="product-card w-full bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
+
+                <router-link :to="{ name: 'DetailProduct', params: { slug: product.slug } }" class="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row
+                    md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+                    <img class="object-cover w-full rounded-t-lg md:h-auto ml-4 md:w-28 md:rounded-none md:rounded-l-lg"
+                        src="https://preppykitchen.com/wp-content/uploads/2016/04/Fruit-tart-2019-Recipe.jpg" alt="">
+                    <div class="flex flex-col justify-between p-4 leading-normal">
+                        <p class="text-lg font-bold text-black truncate block capitalize">{{
+                            formatRupiah(product.base_price) }}</p>
+                        <p class="text-sm font-bold text-gray-600 truncate block capitalize mt-2 mb-4">{{ product.name }}
+                        </p>
+                        <div class="flex items-center">
+                            <p class="text-sm font-bold text-black truncate block capitalize mt-2">Buy Now</p>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="w-5 h-5 ml-28 mt-2">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+                            </svg>
+
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="w-5 h-5 ml-4 mt-2">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                            </svg>
+
+                        </div>
+
+                    </div>
+                </router-link>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-8" id="scroll_product">
+        <p class="text-gray-900 text-2xl title-font font-medium mb-8 ml-3">Product</p>
+
         <div class="grid md:grid-cols-4 gap-8">
-
             <div v-for="product in getProduct" :key="product.id"
-                class="w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
+                class="product-card w-full bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
                 <a href="">
                     <img src="https://images.fineartamerica.com/images/artworkimages/mediumlarge/2/collection-of-fruit-on-white-background-nicholas-eveleigh.jpg"
-                        alt="Product" class="h-80 w-72 object-cover rounded-t-xl" />
+                        alt="Product" class="h-80 w-full object-cover rounded-t-xl" />
                 </a>
-                <div class="px-4 py-3 w-72">
+                <div class="px-4 py-3">
                     <a href="">
                         <span class="text-gray-400 mr-3 uppercase text-xs">Brand</span>
                     </a>
@@ -51,7 +110,6 @@
                         <a href="">
                             <p class="text-lg font-bold text-black truncate block capitalize">{{ product.name }}</p>
                         </a>
-
 
                         <div class="flex items-center">
                             <p class="text-lg font-semibold text-black cursor-auto my-3">{{
@@ -62,22 +120,18 @@
                             </del>
                             <div class="ml-1">
                                 <button>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                                        class="bi bi-bag-plus" viewBox="0 0 16 16">
-                                        <path fill-rule="evenodd"
-                                            d="M8 7.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0v-1.5H6a.5.5 0 0 1 0-1h1.5V8a.5.5 0 0 1 .5-.5z" />
-                                        <path
-                                            d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z" />
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
                                     </svg>
                                 </button>
                             </div>
                         </div>
                     </router-link>
                 </div>
+
             </div>
-
-
-
         </div>
     </div>
 </template>
@@ -85,12 +139,26 @@
 <script>
 import { mapGetters, mapActions } from 'vuex';
 
+import { Swiper, SwiperSlide } from 'swiper/vue';
+
+import 'swiper/css';
+import 'swiper/css/pagination';
+
+import { Pagination } from 'swiper/modules';
+import { Autoplay } from 'swiper/modules';
+
 export default {
+    components: {
+        Swiper,
+        SwiperSlide,
+    },
     computed: {
-        ...mapGetters('product', ['getProduct'])
+        ...mapGetters('product', ['getProduct', 'getShortProduct']),
+        ...mapGetters('category', ['getCategories']),
     },
     methods: {
-        ...mapActions('product', ['fetchProduct']),
+        ...mapActions('product', ['fetchProduct', 'fetchShortProduct']),
+        ...mapActions('category', ['fetchCategory']),
 
         // Format Rupiah
         formatRupiah(number) {
@@ -102,8 +170,16 @@ export default {
         },
     },
     created() {
-        this.fetchProduct()
-    }
+        this.fetchProduct(),
+            this.fetchShortProduct()
+        this.fetchCategory();
+    },
+    setup() {
+        return {
+            modules: [Pagination],
+            modules: [Autoplay]
+        };
+    },
 }
 
 </script>

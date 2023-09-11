@@ -75,11 +75,12 @@
                             <p class="text-sm text-gray-700"></p>
                         </div>
                     </div>
-                    <router-link to="/complete-payment">
-                        <button
-                            class="mt-6 w-full rounded-md bg-yellow-400 py-1.5 font-medium text-yellow-50 hover:bg-yellow-400">Check
-                            out</button>
-                    </router-link>
+
+                    <button @click="checkout"
+                        class="mt-6 w-full rounded-md bg-yellow-400 py-1.5 font-medium text-yellow-50 hover:bg-yellow-400">
+                        Checkout
+                    </button>
+
                 </div>
             </div>
         </div>
@@ -88,6 +89,7 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
+import Swal from 'sweetalert2'
 export default {
     data() {
         return {
@@ -127,6 +129,22 @@ export default {
             }, 0);
             return this.subtotal
         },
+
+        checkout() {
+            Swal.fire({
+                title: 'Are you sure you want to checkout?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Yes',
+                cancelButtonText: 'No',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.$router.push('/complete-payment')
+                } else {
+                    Swal.fire('Transaction cancelled', '', 'info')
+                }
+            })
+        }
 
 
     },

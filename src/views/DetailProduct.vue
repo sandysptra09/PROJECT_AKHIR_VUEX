@@ -27,7 +27,7 @@
                         </li>
 
                         <li>
-                            <router-link to="/all-categories">
+                            <router-link to="/category">
                                 <a href="#" class="text-neutral-500 dark:text-neutral-200">Category</a>
                             </router-link>
                             <span class="mx-4 h-auto text-gray-400 font-medium">/</span>
@@ -48,12 +48,12 @@
 
         <!-- Detail Product -->
         <div class="mx-auto max-w-6xl mt-10 justify-center px-6 md:flex md:space-x-6 xl:px-0">
-            <div class="rounded-lg md:w-4/4">
+            <div class="rounded-lg md:w-4/12">
                 <img alt="ecommerce" class=" w-100 object-cover  object-center rounded  border-gray-200"
                     src="https://img.freepik.com/premium-photo/fresh-bright-fruits-berries-white-background-ai-generated_447653-648.jpg?w=360">
             </div>
 
-            <div class="rounded-lg md:w-2/4">
+            <div class="rounded-lg md:w-5/12">
                 <h2 class="text-sm title-font text-gray-500 tracking-widest mb-2">BRAND NAME</h2>
                 <h1 class="text-gray-900 text-3xl title-font mb-4 font-medium mb-1">{{
                     capitalizeFirstLetter(product.name) }}
@@ -125,7 +125,7 @@
 
             </div>
 
-            <div class="rounded-lg md:w-1/4">
+            <div class="rounded-lg md:w-3/12">
                 <div
                     class="max-w-sm p-6 bg-white border border-gray-300 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                     <a href="#">
@@ -331,15 +331,6 @@ export default {
             return text.charAt(0).toUpperCase() + text.slice(1);
         },
 
-        // tambah() {
-        //     this.cek++
-        // },
-        // kurang() {
-        //     if (this.cek > 1) {
-        //         this.cek--
-        //     }
-
-        // },
 
         // Format Rupiah
         formatRupiah(number) {
@@ -356,7 +347,7 @@ export default {
     },
     mounted() {
         const product_slug = this.$route.params.slug;
-        // console.log("Fetching single product with Slug:", product_slug);
+        
         this.fetchSingleProduct(product_slug);
 
         // Authtentication Token
@@ -367,4 +358,5 @@ export default {
 };
 
 </script>
+
 

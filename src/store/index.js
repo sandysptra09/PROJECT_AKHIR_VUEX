@@ -8,6 +8,7 @@ import keranjang from './modules/keranjang'
 import order from "./modules/order";
 import wishlist from "./modules/wishlist";
 import search from "./modules/search";
+import address from "./modules/address";
 
 const store = createStore({
     state: {
@@ -22,7 +23,8 @@ const store = createStore({
         keranjang,
         order,
         wishlist,
-        search
+        search,
+        address
     },
 });
   
