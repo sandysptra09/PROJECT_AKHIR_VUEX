@@ -49,6 +49,8 @@ const address = {
                 console.log(response.data);
             } catch (error) {
                 console.error(error);
+            } finally {
+                dispatch("keranjang/fetchAddress", null, { root: true });
             }
         },
 

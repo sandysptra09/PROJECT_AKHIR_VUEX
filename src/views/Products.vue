@@ -63,7 +63,7 @@
                 <router-link :to="{ name: 'DetailProduct', params: { slug: product.slug } }" class="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row
                     md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
                     <img class="object-cover w-full rounded-t-lg md:h-auto ml-4 md:w-28 md:rounded-none md:rounded-l-lg"
-                        src="https://preppykitchen.com/wp-content/uploads/2016/04/Fruit-tart-2019-Recipe.jpg" alt="">
+                        src="https://img.freepik.com/premium-photo/fresh-bright-fruits-berries-white-background-ai-generated_447653-648.jpg?w=360" alt="">
                     <div class="flex flex-col justify-between p-4 leading-normal">
                         <p class="text-lg font-bold text-black truncate block capitalize">{{
                             formatRupiah(product.base_price) }}</p>

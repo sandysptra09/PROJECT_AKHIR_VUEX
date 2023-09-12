@@ -118,9 +118,6 @@
                             </path>
                         </svg>
                     </button>
-                    <button class="ml-4" @click="deleteWishlist(product.id)">
-                        Hapus Wishlist
-                    </button>
                 </div>
 
             </div>
@@ -323,9 +320,6 @@ export default {
             });
         },
 
-        // Hapus Wishlist
-        ...mapActions('wishlist', ['deleteWishlist']),
-
 
         capitalizeFirstLetter(text) {
             return text.charAt(0).toUpperCase() + text.slice(1);
@@ -347,7 +341,7 @@ export default {
     },
     mounted() {
         const product_slug = this.$route.params.slug;
-        
+
         this.fetchSingleProduct(product_slug);
 
         // Authtentication Token
